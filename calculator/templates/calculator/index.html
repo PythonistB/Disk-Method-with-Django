@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Method of Disks</title>
+    <link rel="stylesheet" href="{% static 'calculator/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>Finding Volume Using the Disk Method</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="function" placeholder="Enter f(x)" value="{{ input.function }}">
+        <input type="number" step="any" name="a" placeholder="Lower limit a" value="{{ input.a }}">
+        <input type="number" step="any" name="b" placeholder="Upper limit b" value="{{ input.b }}">
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if volume %}
+        <h2>{{ volume }}</h2>
+        <div class="plot">{{ function_fig|safe }}</div>
+        <div class="plot">{{ solid_fig|safe }}</div>
+        <div class="plot">{{ solid_2d_fig|safe }}</div>
+    {% endif %}
+</div>
+</body>
+</html>
